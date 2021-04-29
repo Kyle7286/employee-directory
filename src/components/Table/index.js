@@ -7,10 +7,10 @@ function Table(props) {
       <thead>
         <tr>
           <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Image</button></th>
-          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Name</button></th>
-          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Email</button></th>
-          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Phone</button></th>
-          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">DOB</button></th>
+          <th scope="col" className="text-center"><button data-sortid={props.sortID.name} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Name</button></th>
+          <th scope="col" className="text-center"><button data-sortid={props.sortID.email} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Email</button></th>
+          <th scope="col" className="text-center"><button data-sortid={props.sortID.phone} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Phone</button></th>
+          <th scope="col" className="text-center"><button data-sortid={props.sortID.dob} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">DOB</button></th>
         </tr>
       </thead>
       <tbody className="">

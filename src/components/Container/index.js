@@ -10,6 +10,12 @@ class Container extends Component {
     state = {
         result: { results: [] },
         search: "",
+        sortID: {
+            name: "0",
+            email: "0",
+            phone: "0",
+            dob: "0",
+        }
     };
 
     // When this component mounts, fetch random employees
@@ -28,13 +34,17 @@ class Container extends Component {
 
     // Handle Table header clicking to sort
     handleTableHeaderClick = event => {
-        event.preventDefault(); 
-        this.setState(
-            {
-                result: {
-                    results: Sort.sortTable(event.target.innerHTML, this.state.result.results)
-                }
-            })
+        event.preventDefault();
+        const aSorted = Sort.sortTable(event.target.innerHTML, this.state.result.results, event.target.getAttribute("data-sortid"))
+        // If array is defined, then update the state
+        if (aSorted) {
+            this.setState(
+                {
+                    result: {
+                        results: aSorted
+                    }
+                })
+        }
     };
 
     // Render Component
@@ -46,6 +56,7 @@ class Container extends Component {
                 <Table
                     result={this.state.result}
                     handleTableHeaderClick={this.handleTableHeaderClick}
+                    sortID={this.state.sortID}
                 />
             </div>
         )

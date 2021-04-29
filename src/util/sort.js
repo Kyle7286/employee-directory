@@ -1,5 +1,7 @@
 export default {
-    sortTable: function (col, array) {
+    sortTable: function (col, array, sortID) {
+        
+        console.log(sortID);
         switch (col) {
             case "Name":
                 return array.sort(sortAscending)
