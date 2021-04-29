@@ -1,53 +1,34 @@
 export default {
     sortTable: function (col, array, sortID) {
-        
-        console.log(sortID);
         switch (col) {
             case "Name":
-                return array.sort(sortAscending)
-                break;
-            case "Email":
-                console.log("Email was clicked");
-                break;
-            case "Phone":
-                console.log("Phone was clicked");
-                break;
-            case "DOB":
-                console.log("DOB was clicked");
+                return array.sort(sortAscending(sortID, col.toLowerCase(), "first"))
                 break;
             default:
+                return array.sort(sortAscending(sortID, col.toLowerCase()))
                 break;
         }
     }
 };
 
-function sortAscending(a, b) {
-    // Use toUpperCase() to ignore character casing
-    const bandA = a.name.first.toUpperCase();
-    const bandB = b.name.first.toUpperCase();
+// Take in the prop(s) name(s) and sort asc/desc based on the sortID from the element's datavalue
+const sortAscending = (sortID, propName, propName2) =>
+    (a, b) => {
+        if (!propName2) {
+            if (sortID === "0" || sortID === "-1") {
+                return a[propName] == b[propName] ? 0 : a[propName] < b[propName] ? -1 : 1
+            } else {
+                return b[propName] == a[propName] ? 0 : b[propName] < a[propName] ? -1 : 1
+            }
+        } else {
+            if (sortID === "0" || sortID === "-1") {
+                return a[propName][propName2] == b[propName][propName2] ? 0 : a[propName][propName2] < b[propName][propName2] ? -1 : 1
+            } else {
+                return b[propName][propName2] == a[propName][propName2] ? 0 : b[propName][propName2] < a[propName][propName2] ? -1 : 1
 
-    let comparison = 0;
-    if (bandA > bandB) {
-        comparison = 1;
-    } else if (bandA < bandB) {
-        comparison = -1;
+            }
+        }
     }
-    return comparison;
-}
-
-function sortDescending(a, b) {
-    // Use toUpperCase() to ignore character casing
-    const bandA = a.name.first.toUpperCase();
-    const bandB = b.name.first.toUpperCase();
-
-    let comparison = 0;
-    if (bandB > bandA) {
-        comparison = 1;
-    } else if (bandB < bandA) {
-        comparison = -1;
-    }
-    return comparison;
-}
 
 
 
