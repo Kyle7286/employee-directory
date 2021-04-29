@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import API from "../../util/API";
+import sort from "../../util/sort"
 import Header from "../Header";
 import Search from "../Search";
 import Table from "../Table";
@@ -16,6 +17,14 @@ class Container extends Component {
         this.getEmployees();
     }
 
+    sort(col) {
+        let x = 
+        this.setState(
+            {
+                result: { results: sort.sort(col, this.state.result.results) }
+            })
+    }
+
     // Call random employees API
     getEmployees() {
         API.search()
@@ -25,9 +34,11 @@ class Container extends Component {
             .catch(err => console.log(err));
     };
 
+
+    // Handle Table header clicking
     handleTableHeaderClick = event => {
         event.preventDefault();
-        console.log("Herro!");
+        this.sort(event.target.innerHTML)
     };
 
     render() {
