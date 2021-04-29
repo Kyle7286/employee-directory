@@ -1,14 +1,15 @@
 import React from "react";
 
-function Search() {
+function Search(props) {
   return (
     <form className="search w-25 m-auto">
       <div className="form-group">
-        <input    
+        <input
           className="form-control"
           type="text"
           placeholder="Filter..."
           id="search"
+          onChange={props.handleInputChange}
         />
       </div>
     </form>
