@@ -3,8 +3,7 @@ const BASEURL = "https://randomuser.me/api/?results=10&inc=picture,name,phone,em
 
 export default {
   search: function() {
-    const data = axios.get(BASEURL)
-    return data;
+    return axios.get(BASEURL)
   }
 };
 

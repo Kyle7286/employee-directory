@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import API from "../../util/API";
-import Heading from "../Heading"
+import Header from "../Header";
+import Search from "../Search";
+import Table from "../Table";
+
 
 class Container extends Component {
     state = {
@@ -23,9 +26,11 @@ class Container extends Component {
 
     render() {
         return (
-            <Heading
-                result={this.state.result}
-            />
+            <div>
+                <Header />
+                <Search />
+                <Table result={this.state.result} />
+            </div>
         )
     }
 }
