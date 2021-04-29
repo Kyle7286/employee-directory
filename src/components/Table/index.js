@@ -3,7 +3,7 @@ import React from "react";
 function Table(props) {
   return (
     <table className="table table-striped mt-5">
-      {console.log(props.result.results)}
+      {/* {console.log(props.result.results)} */}
       <thead>
         <tr>
           <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Image</button></th>

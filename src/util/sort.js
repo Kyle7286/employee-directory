@@ -1,9 +1,8 @@
 export default {
-    sort: function (col, array) {
+    sortTable: function (col, array) {
         switch (col) {
             case "Name":
-                console.log(array);
-                return array.sort(compare)
+                return array.sort(sortAscending)
                 break;
             case "Email":
                 console.log("Email was clicked");
@@ -17,13 +16,10 @@ export default {
             default:
                 break;
         }
-
-
-        return "Hello from other side"
     }
 };
 
-function compare(a, b) {
+function sortAscending(a, b) {
     // Use toUpperCase() to ignore character casing
     const bandA = a.name.first.toUpperCase();
     const bandB = b.name.first.toUpperCase();
@@ -32,6 +28,20 @@ function compare(a, b) {
     if (bandA > bandB) {
         comparison = 1;
     } else if (bandA < bandB) {
+        comparison = -1;
+    }
+    return comparison;
+}
+
+function sortDescending(a, b) {
+    // Use toUpperCase() to ignore character casing
+    const bandA = a.name.first.toUpperCase();
+    const bandB = b.name.first.toUpperCase();
+
+    let comparison = 0;
+    if (bandB > bandA) {
+        comparison = 1;
+    } else if (bandB < bandA) {
         comparison = -1;
     }
     return comparison;
