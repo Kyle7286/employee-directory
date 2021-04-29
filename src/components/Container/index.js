@@ -16,6 +16,7 @@ class Container extends Component {
         this.getEmployees();
     }
 
+    // Call random employees API
     getEmployees() {
         API.search()
             .then(res => {
@@ -24,12 +25,20 @@ class Container extends Component {
             .catch(err => console.log(err));
     };
 
+    handleTableHeaderClick = event => {
+        event.preventDefault();
+        console.log("Herro!");
+    };
+
     render() {
         return (
             <div>
                 <Header />
                 <Search />
-                <Table result={this.state.result} />
+                <Table
+                    result={this.state.result}
+                    handleTableHeaderClick={this.handleTableHeaderClick}
+                />
             </div>
         )
     }

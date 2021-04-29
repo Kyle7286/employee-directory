@@ -6,11 +6,11 @@ function Table(props) {
       {console.log(props.result.results)}
       <thead>
         <tr>
-          <th scope="col" className="text-center"><button className="btn font-weight-bold shadow-none">Image</button></th>
-          <th scope="col" className="text-center"><button className="btn font-weight-bold shadow-none">Name</button></th>
-          <th scope="col" className="text-center"><button className="btn font-weight-bold shadow-none">Email</button></th>
-          <th scope="col" className="text-center"><button className="btn font-weight-bold shadow-none">Phone</button></th>
-          <th scope="col" className="text-center"><button className="btn font-weight-bold shadow-none">DOB</button></th>
+          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Image</button></th>
+          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Name</button></th>
+          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Email</button></th>
+          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Phone</button></th>
+          <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">DOB</button></th>
         </tr>
       </thead>
       <tbody className="">
