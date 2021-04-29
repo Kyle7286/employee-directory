@@ -8,7 +8,7 @@ function Search() {
           className="form-control"
           type="text"
           placeholder="Filter..."
-          id="breed"
+          id="search"
         />
       </div>
     </form>

@@ -11,12 +11,12 @@ class Container extends Component {
         search: "",
     };
 
-    // When this component mounts, search for the movie "The Matrix"
+    // When this component mounts, fetch random employees
     componentDidMount() {
-        this.searchMovies();
+        this.getEmployees();
     }
 
-    searchMovies() {
+    getEmployees() {
         API.search()
             .then(res => {
                 this.setState({ result: res.data })
