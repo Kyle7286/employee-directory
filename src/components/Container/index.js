@@ -26,10 +26,9 @@ class Container extends Component {
     getEmployees() {
         API.search()
             .then(res => {
+                // Add human readable date
                 let alteredResults = this.convertDOB([...res.data.results])
-                console.log(alteredResults);
-
-
+     
                 this.setState(
                     {
                         staticResults: [...alteredResults],
@@ -41,7 +40,7 @@ class Container extends Component {
             .catch(err => console.log(err));
     };
 
-    // Convert DOB
+    // Convert DOB to human readable
     convertDOB(array) {
         
         // Loop thru each employee and add the convertedDOB property and value
@@ -51,8 +50,6 @@ class Container extends Component {
                 month: 'long',
                 year: 'numeric'
             })
-            console.log(date);
-
             employee.dob['convertDOB'] = date;
         });
 
