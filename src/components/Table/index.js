@@ -1,9 +1,7 @@
-import React from "react";
-
 function Table(props) {
   return (
     <table className="table table-striped mt-5">
-      {/* {console.log(props.result.results)} */}
+      {console.log(props)}
       <thead>
         <tr>
           <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Image</button></th>
@@ -14,8 +12,8 @@ function Table(props) {
         </tr>
       </thead>
       <tbody className="">
-        {props.result.results.map(employee => (
-          <tr key={employee.name.first}>
+        {props.results.map(employee => (
+          <tr key={employee.phone}>
             <td className="image text-center"><img alt="employee profile" src={employee.picture.thumbnail}></img></td>
             <td className="name  text-center pt-4">{employee.name.first} {employee.name.last}</td>
             <td className="email text-center pt-4">{employee.email}</td>

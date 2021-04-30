@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import { Component } from "react";
 import API from "../../util/API";
 import Sort from "../../util/Sort"
 import Header from "../Header";
@@ -8,8 +8,8 @@ import Table from "../Table";
 
 class Container extends Component {
     state = {
-        result: { results: [] },
-        filtered: { results: [] },
+        results: [],
+        staticResults: [], 
         search: "",
         nameSort: "0",
         emailSort: "0",
@@ -26,21 +26,26 @@ class Container extends Component {
     getEmployees() {
         API.search()
             .then(res => {
-                this.setState({ result: res.data, filtered: res.data })
+                console.log("Reply from API");
+                console.log(res.data.results);
+                this.setState({ results: [...res.data.results] })
+                console.log("Checking state...");
+                console.log(this.state.results);
             })
             .catch(err => console.log(err));
+
     };
 
     // Handle Table header clicking to sort
-    handleTableHeaderClick = event => {
+    handleTableHeaderClick = async event => {
         event.preventDefault();
         // Send data over to Sort.js for sorting
-        const aSorted = Sort.sortTable(event.target.innerHTML, this.state.filtered.results, event.target.getAttribute("data-sortid"));
+        const aSorted = await Sort.sortTable(event.target.innerHTML, [...this.state.results], event.target.getAttribute("data-sortid"));
 
-        // build the property name string based on element clicked
-        const sSortName = event.target.innerHTML.toLowerCase() + "Sort";
+        console.log("===AFTER SORTING=====");
+        console.log(aSorted);
 
-        // Set sort to asc(1) or desc(-1) depending on what it was before
+        // Set sort to asc(1) or desc(-1) depending on what it was before and send it over to the element that was clicked
         let sort = event.target.getAttribute("data-sortid");
         if (sort === "0" || sort === "-1") {
             sort = "1"
@@ -48,13 +53,14 @@ class Container extends Component {
             sort = "-1"
         }
 
+        // build the property name string based on element clicked
+        const sSortName = event.target.innerHTML.toLowerCase() + "Sort";
+
         // If array is defined, then update the state with the sorted array and sortID
         if (aSorted) {
             this.setState(
                 {
-                    result: {
-                        filtered: aSorted
-                    },
+                    results: [...aSorted],
                     [sSortName]: sort
                 })
         }
@@ -62,27 +68,23 @@ class Container extends Component {
 
 
     handleInputChange = event => {
+        // Update state with user input to render page dynamically
         this.setState({ search: event.target.value });
 
+        // Assign value to a variable for easier use
         let regex = event.target.value
-        let newArray = [...this.state.result.results]
 
+        // Spread state results into new array to prevent altering state directly
+        let newArray = [...this.state.results]
+
+        // Filter newArray based off user input, multiple properties
         let x = (newArray.filter(function (element) {
-            return element.name.first.match(new RegExp(regex, 'gi')) || element.name.last.match(new RegExp(regex, 'gi')) || element.phone.match(new RegExp(regex, 'gi')) || element.email.match(new RegExp(regex, 'gi'))
+            return (element.name.first + " " + element.name.last).match(new RegExp(regex, 'gi')) || element.phone.match(new RegExp(regex, 'gi')) || element.email.match(new RegExp(regex, 'gi'))
         })
         );
 
-        if (x) {
-            this.setState(
-                {
-                    filtered: {
-                        results: x
-                    }
-
-                })
-        }
-
-        console.log(x);
+        // Set filtered array state if an array is returned
+        if (x) { this.setState({ results: x }) }
     };
 
     // Render Component
@@ -93,7 +95,7 @@ class Container extends Component {
                 <Search
                     handleInputChange={this.handleInputChange} />
                 <Table
-                    result={this.state.filtered}
+                    results={this.state.results}
                     handleTableHeaderClick={this.handleTableHeaderClick}
                     nameSort={this.state.nameSort}
                     emailSort={this.state.emailSort}

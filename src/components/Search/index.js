@@ -1,5 +1,3 @@
-import React from "react";
-
 function Search(props) {
   return (
     <form className="search w-25 m-auto">
