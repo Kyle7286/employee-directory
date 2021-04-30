@@ -26,10 +26,14 @@ class Container extends Component {
     getEmployees() {
         API.search()
             .then(res => {
+                let alteredResults = this.convertDOB([...res.data.results])
+                console.log(alteredResults);
+
+
                 this.setState(
                     {
-                        staticResults: [...res.data.results],
-                        visibleResults: [...res.data.results]
+                        staticResults: [...alteredResults],
+                        visibleResults: [...alteredResults]
                     }
                 )
 
@@ -37,10 +41,28 @@ class Container extends Component {
             .catch(err => console.log(err));
     };
 
+    // Convert DOB
+    convertDOB(array) {
+        
+        // Loop thru each employee and add the convertedDOB property and value
+        array.forEach(employee => {
+            const dobISO = employee.dob.date;
+            const date = new Date(dobISO).toLocaleDateString('en-US', {
+                month: 'long',
+                year: 'numeric'
+            })
+            console.log(date);
+
+            employee.dob['convertDOB'] = date;
+        });
+
+        return array
+    }
+
     // Handle Table header clicking to sort
     handleTableHeaderClick = async event => {
         event.preventDefault();
-        
+
         // Send data over to Sort.js for sorting
         const aSorted = await Sort.sortTable(event.target.innerHTML, [...this.state.visibleResults], event.target.getAttribute("data-sortid"));
 
@@ -77,7 +99,7 @@ class Container extends Component {
             return (element.name.first + " " + element.name.last).match(new RegExp(regex, 'gi'))
                 || element.phone.match(new RegExp(regex, 'gi'))
                 || element.email.match(new RegExp(regex, 'gi'))
-            })
+        })
         );
 
         // Update visibleResults state if an array is returned

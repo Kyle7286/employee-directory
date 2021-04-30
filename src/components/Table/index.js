@@ -17,7 +17,7 @@ function Table(props) {
             <td className="name  text-center pt-4">{employee.name.first} {employee.name.last}</td>
             <td className="email text-center pt-4">{employee.email}</td>
             <td className="phone text-center pt-4">{employee.phone}</td>
-            <td className="dob pt-4">{employee.dob.date}</td>
+            <td className="dob pt-4">{employee.dob.convertDOB}</td>
           </tr>
         ))}
       </tbody>
