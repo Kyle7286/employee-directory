@@ -1,14 +1,13 @@
-const Sort =  {
+const Sort = {
     sortTable: function (col, array, sortID) {
-        console.log(array);
-        
+
         switch (col) {
             case "Name":
                 return array.sort(sortAscending(sortID, col.toLowerCase(), "first"))
-                
+
             default:
                 return array.sort(sortAscending(sortID, col.toLowerCase()))
-               
+
         }
     }
 };
@@ -32,7 +31,4 @@ const sortAscending = (sortID, propName, propName2) =>
         }
     }
 
-
-
-
-    export default Sort;
+export default Sort;

@@ -80,7 +80,7 @@ class Container extends Component {
             })
         );
 
-        // Set filtered array state if an array is returned
+        // Update visibleResults state if an array is returned
         if (filteredResults) {
             this.setState(
                 {
