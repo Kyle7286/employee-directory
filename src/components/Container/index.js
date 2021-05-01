@@ -5,7 +5,6 @@ import Header from "../Header";
 import Search from "../Search";
 import Table from "../Table";
 
-
 class Container extends Component {
     state = {
         staticResults: [],

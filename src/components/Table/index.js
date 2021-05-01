@@ -1,13 +1,16 @@
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
+
 function Table(props) {
   return (
     <table className="table table-striped mt-5">
       <thead>
+          
         <tr>
           <th scope="col" className="text-center"><button onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Image</button></th>
-          <th scope="col" className="text-center"><button id=""data-sortid={props.nameSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Name</button></th>
-          <th scope="col" className="text-center"><button id=""data-sortid={props.emailSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Email</button></th>
-          <th scope="col" className="text-center"><button id=""data-sortid={props.phoneSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Phone</button></th>
-          <th scope="col" className="text-center"><button id=""data-sortid={props.dobSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">DOB</button></th>
+          <th scope="col" className="text-center"><button data-sortid={props.nameSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Name</button>{props.nameSort === "1" ? <FaChevronUp /> : <FaChevronDown />}</th>
+          <th scope="col" className="text-center"><button data-sortid={props.emailSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Email</button>{props.emailSort === "1" ? <FaChevronUp /> : <FaChevronDown />}</th>
+          <th scope="col" className="text-center"><button data-sortid={props.phoneSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">Phone</button>{props.phoneSort === "1" ? <FaChevronUp /> : <FaChevronDown />}</th>
+          <th scope="col" className="text-center"><button data-sortid={props.dobSort} onClick={props.handleTableHeaderClick} className="btn font-weight-bold shadow-none">DOB</button>{props.dobSort === "1" ? <FaChevronUp /> : <FaChevronDown />}</th>
         </tr>
       </thead>
       <tbody className="">
